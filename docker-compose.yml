@@ -14,6 +14,7 @@ services:
       - AUDIT_WRITE
       - DAC_OVERRIDE
       - CAP_SYS_PTRACE
+      - CAP_CHOWN
     security_opt:
       - no-new-privileges:true
     environment:
@@ -23,11 +24,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '4'
+          cpus: '1'
           memory: 512M
     shm_size: 2g
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - ${XAUTHORITY}:/tmp/.docker.xauth:ro
-      - ${BANKFILES:-./run/}:/home/ff/Downloads
+      - ${BANKFILES:-./run/}:/mnt/bankfiles
       #- /etc/machine-id:/etc/machine-id:ro - IDK why if it's used
